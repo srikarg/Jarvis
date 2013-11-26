@@ -12,17 +12,16 @@ Clone this repository and then run `npm install` to install the server's depende
 
 1. First, enter your new command into `commands.js`. The data that the user passed to the command can be accessed by the `query` variable.
 
-```
-exports.myAwesomeCommand = function(query, res) {
-	// Do something awesome.
-	// 
-}
-```
+	```
+	exports.myAwesomeCommand = function(query, res) {
+		// Do something awesome.
+	}
+	```
 
-2. Next, add you command's trigger, prefixed by an exclamation point, into the `switch` block in `app.js`. You will need to call the function you just created in the previous step. Also, note that the data the user passed to the command is the `message` parameter for the command's function. The `res` allows the function to send its output back to the user.
+2. Next, add you command's trigger, prefixed by an exclamation point, into the `switch` block in `app.js`. You will need to call the function you just created in the previous step. Also, note that the data the user passed to the command is the `message` parameter for the command's function. The `res` variable allows the function to send its output back to the user.
 
-```
-case '!yourAwesomeCommandTrigger':
-	commands.myAwesomeCommand(message, res);
-	break;
-```
+	```
+	case '!yourAwesomeCommandTrigger':
+		commands.myAwesomeCommand(message, res);
+		break;
+	```

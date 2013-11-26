@@ -1,0 +1,123 @@
+*, *:before, *:after {
+	margin: 0;
+	padding: 0;
+}
+
+html, body {
+	height: 100%;
+}
+
+body {
+	font-size: 100%;
+	font-family: 'Roboto', sans-serif;
+	line-height: 1.5;
+	color: #222;
+}
+
+a {
+	color: #222;
+}
+
+.wrapper {
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin: 0 auto -100px;
+}
+
+header {
+	padding: 3rem;
+	padding: 48px;
+	text-align: center;
+	background: #70c5e7;
+}
+
+header h1 {
+	font-size: 2.5rem;
+	font-size: 40px;
+}
+
+.content {
+	max-width: 800px;
+	padding: 2rem 1rem;
+	padding: 32px 16px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.content .pure-form-stacked input {
+	margin: 1rem auto;
+	margin: 16px auto;
+	font-size: 1.2rem;
+	font-size: 19px;
+}
+
+.content .pure-form input:focus {
+	border-color: #70c5e7;
+	outline: 0;
+}
+
+.content .submit {
+	background: #70c5e7;
+	color: #222;
+	font-size: 1.2rem;
+	font-size: 19px;
+}
+
+.content .log > ul {
+	list-style: none;
+	padding: 0;
+}
+
+.content .log > ul > li {
+	background: #70c5e7;
+	padding: 1rem;
+	padding: 16px;
+	margin: 2rem auto;
+	margin: 32px auto;
+	border-radius: 0.25rem;
+	border-radius: 4px;
+	width: 100%;
+	max-width: 500px;
+}
+
+.content .log > ul li ul {
+	display: inline-block;
+	margin: 0;
+	list-style: disc;
+}
+
+.user {
+	display: block;
+	font-weight: bold;
+	font-size: 2rem;
+	font-size: 32px;
+}
+
+.date {
+	display: block;
+	font-weight: bold;
+	margin-bottom: 1rem;
+	margin-bottom: 16px;
+}
+
+.message {
+	display: block;
+	font-size: 1.2rem;
+	font-size: 19px;
+	text-align: left;
+}
+
+footer, .push {
+	height: 100px;
+}
+
+footer {
+	text-align: center;
+	background: #70c5e7;
+}
+
+footer p {
+	margin: 0;
+	padding-top: 40px;
+}

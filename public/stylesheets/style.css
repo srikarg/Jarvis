@@ -1,6 +1,9 @@
 *, *:before, *:after {
 	margin: 0;
 	padding: 0;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 html, body {
@@ -16,6 +19,10 @@ body {
 
 a {
 	color: #222;
+}
+
+img {
+	max-width: 100%;
 }
 
 .wrapper {
@@ -106,6 +113,12 @@ header h1 {
 	font-size: 1.2rem;
 	font-size: 19px;
 	text-align: left;
+}
+
+.xkcd p {
+	margin: 0 0 1rem 0;
+	margin: 0 0 16px 0;
+	text-align: center;
 }
 
 footer, .push {

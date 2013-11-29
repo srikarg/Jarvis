@@ -17,8 +17,14 @@ Clone this repository and then run `npm install` to install the server's depende
 		# Do something awesome.
 	```
 
-2. Next, add you command's trigger, prefixed by an exclamation point, into the `switch` block in `server.coffee`. You will need to call the function you just created in the previous step. Also, note that the data the user passed to the command is the `message` parameter for the command's function. The `res` variable allows the function to send its output back to the user.
+2. Next, add your command's trigger, prefixed by an exclamation point, into the `switch` block in `server.coffee`. You will need to call the function you just created in the previous step. Also, note that the data the user passed to the command is the `message` parameter for the command's function. The `res` variable allows the function to send its output back to the user.
 
 	```
 	when '!yourAwesomeCommandTrigger' then commands.myAwesomeCommand message, res
+	```
+
+3. Finally, add your command's documentation into the object returned by `exports.getDocs()` in `help.coffee` as the following:
+
+	```
+	myAwesomeCommand: 'This is a description of myAwesomeCommand. `!yourAwesomeCommandTrigger query`'
 	```

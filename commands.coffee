@@ -1,5 +1,6 @@
 request = require 'request'
 util = require './utility_functions'
+help = require './help'
 moment = require 'moment'
 
 exports.calc = (message, res) ->
@@ -24,19 +25,36 @@ exports.weather = (query, res) ->
 				res.send util.buildMessage 'Sorry, but weather for that location could not be found.'
 			res.send util.buildMessage "It is currently #{ body.data.current_condition[0].weatherDesc[0].value.toLowerCase() } and #{ body.data.current_condition[0].temp_F } degrees Fahrenheit in #{ query }."
 		else
-			res.send util.buildMessage 'I\'m sorry, but I\'m currently having troubles finding the weather for that location.'
+			res.send util.buildMessage 'I\'m sorry, but I\'m currently having trouble finding the weather for that location.'
 
 exports.dictionary = (query, res) ->
 	# TODO: Add dictionary functionality.
 
+exports.xkcd = (query, res) ->
+	if query is ''
+		url = 'http://xkcd.com/info.0.json'
+		request url, (error, response, body) ->
+			if not error and response.statusCode is 200
+				body = JSON.parse body
+				res.send util.buildMessage "<div class=\"xkcd\"><p>Title of comic: #{ body.safe_title }</p><img src=\"#{ body.img }\" /></div>"
+			else
+				res.send util.buildMessage 'Sorry, but the most recent XKCD comic could not be retrieved.'
+	else
+		if not isNaN query # If the query is a number...
+			url = "http://xkcd.com/#{ query }/info.0.json"
+			request url, (error, response, body) ->
+				if not error and response.statusCode is 200
+					body = JSON.parse body
+					res.send util.buildMessage "<div class=\"xkcd\"><p>Title of comic: #{ body.safe_title }</p><img src=\"#{ body.img }\" /></div>"
+				else
+					res.send util.buildMessage 'Sorry, but the comic with the given number was not found.'
+		else
+			res.send util.buildMessage 'Please enter a valid value for the comic number!'
+
 exports.help = (res) ->
-	docs =  """
-			<ul>
-				<li>!calc expression &rarr; Calculates the expression passed to the command.</li>
-				<li>!date &rarr; Returns the current date and time.</li>
-				<li>!weather location &rarr; Returns the weather for the given location, if the location exists of course.</li>
-				<li>!clear &rarr; Clears the chat log.</li>
-				<li>!hide &rarr; Deletes all commands entered by you from the chat log.</li>
-			</ul>
-			"""
-	res.send util.buildMessage docs
+	docs = help.getDocs()
+	html = "<ul>"
+	for key, value of docs
+		html += "<li>!#{ key } &rarr; #{ value }</li>"
+	html += "</ul>"
+	res.send util.buildMessage html

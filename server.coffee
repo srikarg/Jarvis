@@ -55,6 +55,7 @@ app.post '/', (req, res) ->
 		when '!weather' then commands.weather message, res
 		when '!help' then commands.help res
 		when '!dict' then commands.dict message, res
+		when '!xkcd' then commands.xkcd message, res
 		else res.send util.buildMessage 'I\'m sorry, but that command was not found! Enter "!help" if you want to see a list of commands.'
 
 app.listen port

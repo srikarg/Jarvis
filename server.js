@@ -78,6 +78,8 @@
         return commands.help(res);
       case '!dict':
         return commands.dict(message, res);
+      case '!xkcd':
+        return commands.xkcd(message, res);
       default:
         return res.send(util.buildMessage('I\'m sorry, but that command was not found! Enter "!help" if you want to see a list of commands.'));
     }

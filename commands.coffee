@@ -35,12 +35,13 @@ exports.dict = (query, res) ->
 	if query is ''
 		res.send util.buildMessage 'I need a word to find the definition for master!'
 		return
-	url = "https://api.pearson.com/v2/dictionaries/wordwise/entries?search=#{ encodeURIComponent query }&limit=1&apikey=OTCBi9ycIZfwcNAA4XFxawu7yYxSSkN2"
+	url = "http://api.duckduckgo.com/?q=define+#{ encodeURIComponent query }&format=json"
 	request url, (error, response, body) ->
 		if not error and response.statusCode is 200
 			body = JSON.parse body
-			if typeof body.results[0].senses isnt 'undefined' and body.results[0].senses.length > 0
-				res.send util.buildMessage "<div class=\"dictionary\"><span class=\"bold\">#{ query }</span>: <span class=\"italics\">#{ body.results[0].senses[0].definition }</span></div>"
+			if typeof body.Definition isnt 'undefined' and body.Definition isnt ''
+				definition = body.Definition.slice(body.Definition.indexOf(': ') + 1).replace(/'''/g, '"').trim()
+				res.send util.buildMessage "<div class=\"dictionary\"><span class=\"bold\">#{ query }</span>: <span class=\"italics\">#{ definition }</span></div>"
 			else
 				res.send util.buildMessage "I'm sorry, but the definition for <span class=\"bold\">#{ query }</span> could not be found!"
 		else

@@ -61,12 +61,16 @@
         res.send(util.buildMessage('No need to hate me. I\'m just here to serve you.'));
         return;
       }
+      if (post.indexOf('love') !== -1) {
+        res.send(util.buildMessage('I love you too. Now, let me get back to work!'));
+        return;
+      }
       res.send(util.buildMessage('Please enter a command master. Enter "!help" if you want to see a list of commands.'));
       return;
     }
     triggerLength = post.split(' ')[0].length;
-    trigger = post.substring(0, triggerLength);
-    message = post.substring(triggerLength + 1);
+    trigger = post.substring(0, triggerLength).trim();
+    message = post.substring(triggerLength + 1).trim();
     switch (trigger) {
       case '!calc':
         return commands.calc(message, res);

@@ -15,6 +15,7 @@ body {
 	font-family: 'Roboto', sans-serif;
 	line-height: 1.5;
 	color: #222;
+	background: #f1f1f1;
 }
 
 a {
@@ -36,12 +37,16 @@ header {
 	padding: 3rem;
 	padding: 48px;
 	text-align: center;
-	background: #70c5e7;
+	background: #3498db;
 }
 
 header h1 {
 	font-size: 2.5rem;
 	font-size: 40px;
+}
+
+header a {
+	text-decoration: none;
 }
 
 .content {
@@ -60,12 +65,12 @@ header h1 {
 }
 
 .content .pure-form input:focus {
-	border-color: #70c5e7;
+	border-color: #3498db;
 	outline: 0;
 }
 
 .content .submit {
-	background: #70c5e7;
+	background: #3498db;
 	color: #222;
 	font-size: 1.2rem;
 	font-size: 19px;
@@ -77,7 +82,7 @@ header h1 {
 }
 
 .content .log > ul > li {
-	background: #70c5e7;
+	background: #3498db;
 	padding: 1rem;
 	padding: 16px;
 	margin: 2rem auto;
@@ -112,13 +117,11 @@ header h1 {
 	display: block;
 	font-size: 1.2rem;
 	font-size: 19px;
-	text-align: left;
 }
 
 .xkcd p {
 	margin: 0 0 1rem 0;
 	margin: 0 0 16px 0;
-	text-align: center;
 }
 
 footer, .push {
@@ -127,10 +130,22 @@ footer, .push {
 
 footer {
 	text-align: center;
-	background: #70c5e7;
+	background: #3498db;
 }
 
 footer p {
 	margin: 0;
 	padding-top: 40px;
+}
+
+.italics {
+	font-style: italic;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.text-align-left {
+	text-align: left;
 }

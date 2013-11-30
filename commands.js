@@ -10,15 +10,15 @@
 
   moment = require('moment');
 
-  exports.calc = function(message, res) {
-    if (message.trim() === '') {
+  exports.calc = function(query, res) {
+    if (query === '') {
       res.send(util.buildMessage('You need to enter an expression to calculate!'));
     }
-    message = message.replace(/[^-()\d/*+.]/g, '');
-    if (message === '') {
+    query = query.replace(/[^-()\d/*+.]/g, '');
+    if (query === '') {
       res.send(util.buildMessage('There are no numbers!'));
     }
-    return res.send(util.buildMessage("The result of " + message + " is " + (eval(message))));
+    return res.send(util.buildMessage("The result of " + query + " is " + (eval(query))));
   };
 
   exports.date = function(res) {
@@ -27,12 +27,17 @@
 
   exports.weather = function(query, res) {
     var url;
+    if (query === '') {
+      res.send(util.buildMessage('I need a location to find the weather for master!'));
+      return;
+    }
     url = "http://api.worldweatheronline.com/free/v1/weather.ashx?q=" + (encodeURIComponent(query)) + "&format=json&num_of_days=1&date=today&key=e4zcjce65nyscwr8jqsj8wwr";
     return request(url, function(error, response, body) {
       if (!error && response.statusCode === 200) {
         body = JSON.parse(body);
         if (body.data.error) {
           res.send(util.buildMessage('Sorry, but weather for that location could not be found.'));
+          return;
         }
         return res.send(util.buildMessage("It is currently " + (body.data.current_condition[0].weatherDesc[0].value.toLowerCase()) + " and " + body.data.current_condition[0].temp_F + " degrees Fahrenheit in " + query + "."));
       } else {
@@ -41,7 +46,26 @@
     });
   };
 
-  exports.dictionary = function(query, res) {};
+  exports.dict = function(query, res) {
+    var url;
+    if (query === '') {
+      res.send(util.buildMessage('I need a word to find the definition for master!'));
+      return;
+    }
+    url = "https://api.pearson.com/v2/dictionaries/wordwise/entries?search=" + (encodeURIComponent(query)) + "&limit=1&apikey=OTCBi9ycIZfwcNAA4XFxawu7yYxSSkN2";
+    return request(url, function(error, response, body) {
+      if (!error && response.statusCode === 200) {
+        body = JSON.parse(body);
+        if (typeof body.results[0].senses !== 'undefined' && body.results[0].senses.length > 0) {
+          return res.send(util.buildMessage("<div class=\"dictionary\"><span class=\"bold\">" + query + "</span>: <span class=\"italics\">" + body.results[0].senses[0].definition + "</span></div>"));
+        } else {
+          return res.send(util.buildMessage("I'm sorry, but the definition for <span class=\"bold\">" + query + "</span> could not be found!"));
+        }
+      } else {
+        return res.send(util.buildMessage("I'm sorry, but I'm currently having trouble finding the definition for <span class=\"bold\">" + query + "</span>."));
+      }
+    });
+  };
 
   exports.xkcd = function(query, res) {
     var url;
@@ -50,7 +74,7 @@
       return request(url, function(error, response, body) {
         if (!error && response.statusCode === 200) {
           body = JSON.parse(body);
-          return res.send(util.buildMessage("<div class=\"xkcd\"><p>Title of comic: " + body.safe_title + "</p><img src=\"" + body.img + "\" /></div>"));
+          return res.send(util.buildMessage("<div class=\"xkcd\"><p><a href=\"http://xkcd.com/" + body.num + "/\">" + body.title + "</a></p><img src=\"" + body.img + "\" /></div>"));
         } else {
           return res.send(util.buildMessage('Sorry, but the most recent XKCD comic could not be retrieved.'));
         }
@@ -61,7 +85,7 @@
         return request(url, function(error, response, body) {
           if (!error && response.statusCode === 200) {
             body = JSON.parse(body);
-            return res.send(util.buildMessage("<div class=\"xkcd\"><p>Title of comic: " + body.safe_title + "</p><img src=\"" + body.img + "\" /></div>"));
+            return res.send(util.buildMessage("<div class=\"xkcd\"><p><a href=\"http://xkcd.com/" + body.num + "/\">" + body.title + "</a></p><img src=\"" + body.img + "\" /></div>"));
           } else {
             return res.send(util.buildMessage('Sorry, but the comic with the given number was not found.'));
           }
@@ -75,7 +99,7 @@
   exports.help = function(res) {
     var docs, html, key, value;
     docs = help.getDocs();
-    html = "<ul>";
+    html = "<ul class=\"text-align-left\">";
     for (key in docs) {
       value = docs[key];
       html += "<li>!" + key + " &rarr; " + value + "</li>";

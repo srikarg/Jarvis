@@ -39,7 +39,7 @@ exports.dict = (query, res) ->
 	request url, (error, response, body) ->
 		if not error and response.statusCode is 200
 			body = JSON.parse body
-			if typeof body.Definition isnt 'undefined' and body.Definition isnt ''
+			if body.Definition?
 				definition = body.Definition.slice(body.Definition.indexOf(': ') + 1).replace(/'''/g, '"').trim()
 				res.send util.buildMessage "<div class=\"dictionary\"><span class=\"bold\">#{ query }</span>: <span class=\"italics\">#{ definition }</span></div>"
 			else
@@ -67,6 +67,25 @@ exports.xkcd = (query, res) ->
 					res.send util.buildMessage 'Sorry, but the comic with the given number was not found.'
 		else
 			res.send util.buildMessage 'Please enter a valid value for the comic number!'
+
+exports.image = (query, res) ->
+	if query is ''
+		res.send util.buildMessage 'I need something to search an image for! Please enter something master!'
+		return
+	url = "http://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=#{ encodeURIComponent query }"
+	request url, (error, response, body) ->
+		if not error and response.statusCode is 200
+			body = JSON.parse body
+			if body.responseData?.results
+				images = body.responseData.results
+				if images?.length > 0
+					image = util.random images
+					res.send util.buildMessage "<img src=\"#{ image.unescapedUrl }\" />"
+			else
+				res.send util.buildMessage "I'm sorry, but an image for <span class=\"bold\">#{ query }</span> could not be found!"
+		else
+			res.send util.buildMessage "I'm sorry, but I'm currently having trouble finding an image for <span class=\"bold\">#{ query }</span>."
+
 
 exports.help = (res) ->
 	docs = help.getDocs()

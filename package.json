@@ -1,10 +1,21 @@
 {
   "name": "Jarvis",
   "version": "0.0.1",
-  "dependencies": {
-    "express": "*",
-    "jade": "*",
-    "request": "*",
-    "moment": "*"
+  "description": "Jarvis implemented with Node.js.",
+  "main": "server.js",
+  "scripts": {
+  	"start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/srikarg/Jarvis.git"
+  },
+  "keywords": [
+    "node.js",
+    "jarvis"
+  ],
+  "author": "srikarg",
+  "bugs": {
+    "url": "https://github.com/srikarg/Jarvis/issues"
   }
 }

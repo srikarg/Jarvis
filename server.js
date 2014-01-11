@@ -65,6 +65,10 @@
         res.send(util.buildMessage('I love you too. Now, let me get back to work!'));
         return;
       }
+      if (post.indexOf('problem') !== -1) {
+        res.send(util.buildMessage('<img src="http://i0.kym-cdn.com/photos/images/original/000/096/044/trollface.jpg?1296494117" />'));
+        return;
+      }
       res.send(util.buildMessage('Please enter a command master. Enter "!help" if you want to see a list of commands.'));
       return;
     }
@@ -84,6 +88,8 @@
         return commands.dict(message, res);
       case '!xkcd':
         return commands.xkcd(message, res);
+      case '!image':
+        return commands.image(message, res);
       default:
         return res.send(util.buildMessage('I\'m sorry, but that command was not found! Enter "!help" if you want to see a list of commands.'));
     }

@@ -46,6 +46,10 @@ app.post '/', (req, res) ->
 			res.send util.buildMessage 'I love you too. Now, let me get back to work!'
 			return
 
+		if post.indexOf('problem') isnt -1
+			res.send util.buildMessage '<img src="http://i0.kym-cdn.com/photos/images/original/000/096/044/trollface.jpg?1296494117" />'
+			return
+
 		res.send util.buildMessage 'Please enter a command master. Enter "!help" if you want to see a list of commands.'
 		return
 
@@ -60,6 +64,7 @@ app.post '/', (req, res) ->
 		when '!help' then commands.help res
 		when '!dict' then commands.dict message, res
 		when '!xkcd' then commands.xkcd message, res
+		when '!image' then commands.image message, res
 		else res.send util.buildMessage 'I\'m sorry, but that command was not found! Enter "!help" if you want to see a list of commands.'
 
 app.listen port

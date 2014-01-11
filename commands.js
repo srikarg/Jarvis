@@ -57,7 +57,7 @@
       var definition;
       if (!error && response.statusCode === 200) {
         body = JSON.parse(body);
-        if (typeof body.Definition !== 'undefined' && body.Definition !== '') {
+        if (body.Definition != null) {
           definition = body.Definition.slice(body.Definition.indexOf(': ') + 1).replace(/'''/g, '"').trim();
           return res.send(util.buildMessage("<div class=\"dictionary\"><span class=\"bold\">" + query + "</span>: <span class=\"italics\">" + definition + "</span></div>"));
         } else {
@@ -96,6 +96,32 @@
         return res.send(util.buildMessage('Please enter a valid value for the comic number!'));
       }
     }
+  };
+
+  exports.image = function(query, res) {
+    var url;
+    if (query === '') {
+      res.send(util.buildMessage('I need something to search an image for! Please enter something master!'));
+      return;
+    }
+    url = "http://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + (encodeURIComponent(query));
+    return request(url, function(error, response, body) {
+      var image, images, _ref;
+      if (!error && response.statusCode === 200) {
+        body = JSON.parse(body);
+        if ((_ref = body.responseData) != null ? _ref.results : void 0) {
+          images = body.responseData.results;
+          if ((images != null ? images.length : void 0) > 0) {
+            image = util.random(images);
+            return res.send(util.buildMessage("<img src=\"" + image.unescapedUrl + "\" />"));
+          }
+        } else {
+          return res.send(util.buildMessage("I'm sorry, but an image for <span class=\"bold\">" + query + "</span> could not be found!"));
+        }
+      } else {
+        return res.send(util.buildMessage("I'm sorry, but I'm currently having trouble finding an image for <span class=\"bold\">" + query + "</span>."));
+      }
+    });
   };
 
   exports.help = function(res) {

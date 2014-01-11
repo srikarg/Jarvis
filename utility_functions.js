@@ -7,4 +7,8 @@
     };
   };
 
+  exports.random = function(items) {
+    return items[Math.floor(Math.random() * items.length)];
+  };
+
 }).call(this);

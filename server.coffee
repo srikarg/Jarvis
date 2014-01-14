@@ -59,7 +59,6 @@ app.post '/', (req, res) ->
 
 	switch trigger
 		when '!calc' then commands.calc message, res
-		when '!date' then commands.date res
 		when '!weather' then commands.weather message, res
 		when '!help' then commands.help res
 		when '!dict' then commands.dict message, res

@@ -18,11 +18,7 @@
     if (query === '') {
       res.send(util.buildMessage('There are no numbers!'));
     }
-    return res.send(util.buildMessage("The result of " + query + " is " + (eval(query))));
-  };
-
-  exports.date = function(res) {
-    return res.send(util.buildMessage("It is " + (moment().format('dddd, MMMM Do YYYY, h:mm:ssa.'))));
+    return res.send(util.buildMessage("The result of " + query + " is " + (eval(query)) + "."));
   };
 
   exports.weather = function(query, res) {

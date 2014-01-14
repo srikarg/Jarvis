@@ -11,10 +11,7 @@ exports.calc = (query, res) ->
 
 	if query is ''
 		res.send util.buildMessage 'There are no numbers!'
-	res.send util.buildMessage "The result of #{ query } is #{ eval query }"
-
-exports.date = (res) ->
-	res.send util.buildMessage "It is #{ moment().format 'dddd, MMMM Do YYYY, h:mm:ssa.' }"
+	res.send util.buildMessage "The result of #{ query } is #{ eval query }."
 
 exports.weather = (query, res) ->
 	if query is ''

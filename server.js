@@ -78,8 +78,6 @@
     switch (trigger) {
       case '!calc':
         return commands.calc(message, res);
-      case '!date':
-        return commands.date(res);
       case '!weather':
         return commands.weather(message, res);
       case '!help':

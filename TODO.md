@@ -1,4 +1,4 @@
 # TODO
-1. Add a dictionary command.
-2. Give Jarvis a voice.
-3. Allow user to speak commands.
+[x] Add a dictionary command.
+[ ] Give Jarvis a voice.
+[ ] Allow user to speak commands using the [Annyang](https://www.talater.com/annyang/) JavaScript library.

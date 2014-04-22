@@ -16,7 +16,7 @@ app.use express.urlencoded()
 app.use express.methodOverride()
 app.use app.router
 app.use express.static(path.join __dirname, 'public')
-app.use express.favicon(path.join __dirname, 'public/images/favicon.ico')
+app.use express.favicon(path.join __dirname, 'public/img/favicon.ico')
 
 if app.get 'env' is 'development'
 	app.use express.errorHandler()

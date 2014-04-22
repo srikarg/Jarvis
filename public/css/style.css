@@ -37,7 +37,7 @@ header {
 	padding: 3rem;
 	padding: 48px;
 	text-align: center;
-	background: #3498db;
+	background: #0074D9;
 }
 
 header h1 {
@@ -65,12 +65,12 @@ header a {
 }
 
 .content .pure-form input:focus {
-	border-color: #3498db;
+	border-color: #0074D9;
 	outline: 0;
 }
 
 .content .submit {
-	background: #3498db;
+	background: #0074D9;
 	color: #222;
 	font-size: 1.2rem;
 	font-size: 19px;
@@ -82,7 +82,7 @@ header a {
 }
 
 .content .log > ul > li {
-	background: #3498db;
+	background: #0074D9;
 	padding: 1rem;
 	padding: 16px;
 	margin: 2rem auto;
@@ -130,7 +130,7 @@ footer, .push {
 
 footer {
 	text-align: center;
-	background: #3498db;
+	background: #0074D9;
 }
 
 footer p {

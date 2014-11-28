@@ -19,12 +19,11 @@
   "bugs": {
     "url": "https://github.com/srikarg/Jarvis/issues"
   },
-  "devDependencies": {
+  "dependencies": {
     "body-parser": "^1.9.3",
     "express": "^4.10.4",
     "jade": "^1.8.0",
     "moment": "^2.8.4",
-    "morgan": "^1.5.0",
     "request": "^2.49.0",
     "serve-favicon": "^2.1.7"
   }

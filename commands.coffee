@@ -28,22 +28,6 @@ exports.weather = (query, res) ->
 		else
 			res.send util.buildMessage 'I\'m sorry, but I\'m currently having trouble finding the weather for that location.'
 
-exports.dict = (query, res) ->
-	if query is ''
-		res.send util.buildMessage 'I need a word to find the definition for master!'
-		return
-	url = "http://api.duckduckgo.com/?q=define+#{ encodeURIComponent query }&format=json"
-	request url, (error, response, body) ->
-		if not error and response.statusCode is 200
-			body = JSON.parse body
-			if body.Definition?
-				definition = body.Definition.slice(body.Definition.indexOf(': ') + 1).replace(/'''/g, '"').trim()
-				res.send util.buildMessage "<div class=\"dictionary\"><span class=\"bold\">#{ query }</span>: <span class=\"italics\">#{ definition }</span></div>"
-			else
-				res.send util.buildMessage "I'm sorry, but the definition for <span class=\"bold\">#{ query }</span> could not be found!"
-		else
-			res.send util.buildMessage "I'm sorry, but I'm currently having trouble finding the definition for <span class=\"bold\">#{ query }</span>."
-
 exports.xkcd = (query, res) ->
 	if query is ''
 		url = 'http://xkcd.com/info.0.json'
@@ -85,9 +69,10 @@ exports.image = (query, res) ->
 
 
 exports.help = (res) ->
-	docs = help.getDocs()
-	html = "<ul class=\"text-align-left\">"
-	for key, value of docs
-		html += "<li>!#{ key } &rarr; #{ value }</li>"
-	html += "</ul>"
-	res.send util.buildMessage html
+    console.log 'HERE!'
+    docs = help.getDocs()
+    html = "<ul class=\"text-align-left\">"
+    for key, value of docs
+        html += "<li>!#{ key } &rarr; #{ value }</li>"
+    html += "</ul>"
+    res.send util.buildMessage html
